@@ -4,5 +4,9 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"terminal.integrated.env.windows": {
+			"REPO_ROOT": "${workspaceFolder}"
+		},
+	}
 }
