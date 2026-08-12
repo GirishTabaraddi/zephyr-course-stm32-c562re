@@ -456,7 +456,7 @@ west zephyr-export
 
 Expected output:
 
-![Build output terminal](imgs/zephyr_cmake_export.png)
+![CMAKE Export](imgs/zephyr_cmake_export.png)
 
 ```
 Zephyr (C:/GITHUB/Zephyr_Workspace/deps/zephyr/share/zephyr-package/cmake)
@@ -508,7 +508,7 @@ C:\zephyr-sdk-X.X.X\arm-zephyr-eabi\bin\arm-zephyr-eabi-gcc.exe --version
 
 Expected output:
 
-![Build output terminal](imgs/verification_after_sdk_installation.png)
+![SDK Installation](imgs/verification_after_sdk_installation.png)
 
 ```
 arm-zephyr-eabi-gcc.exe (Zephyr SDK X.X.X) 13.x.x ...
@@ -656,13 +656,33 @@ west flash
 
 # 6. Open serial monitor to read UART output from the board
 #    Find the COM port assigned to the ST-LINK VCP:
-[System.IO.Ports.SerialPort]::GetPortNames()
+open powershell terminal on the side
+.\know_com_port.ps1
+```
+![COM Port](imgs/com_port_ps.png)
 
+```
 #    Open in PowerShell (replace COM3 with your actual port):
-$port = New-Object System.IO.Ports.SerialPort COM3, 115200, None, 8, One
-$port.Open()
-while ($true) { $port.ReadLine() }
-#    Press Ctrl+C to stop
+In the same powershell window, run the below script to open the port:
+.\open_serial_port.ps1
+```
+
+![Serial Port Open](imgs/serial_port_open.png)
+
+```
+#    Press Q to stop
+
+If you are using Putty tool, then do the following setting:
+```
+
+![Putty Config](imgs/putty_configuration.png)
+
+```
+Output will be displayed as below:
+```
+
+![Putty Output](imgs/hello_world_putty.png)
+
 ```
 
 The `activate_venv.bat` script handles steps 2's details automatically:
