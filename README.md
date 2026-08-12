@@ -641,7 +641,7 @@ After the one-time setup above, your session workflow for every subsequent day i
 # 2. Go to the repo and activate the full environment
 #    (dot-source to keep the venv active in the current shell)
 cd C:\GITHUB\Zephyr_Workspace\zephyr-course-stm32-c562re
-. .\activate_zephyr_env.ps1
+. .\activate_venv.bat
 
 # 3. Go to workspace root to run west commands
 cd C:\GITHUB\Zephyr_Workspace
@@ -665,7 +665,7 @@ while ($true) { $port.ReadLine() }
 #    Press Ctrl+C to stop
 ```
 
-The `activate_zephyr_env.ps1` script handles steps 2's details automatically:
+The `activate_venv.bat` script handles steps 2's details automatically:
 it activates the venv, adds CMake and Ninja from `build_tools` to PATH, and sets
 `ZEPHYR_SDK_INSTALL_DIR`.
 
@@ -680,7 +680,7 @@ new PowerShell window, activate again:
 
 ```powershell
 cd C:\GITHUB\Zephyr_Workspace\zephyr-course-stm32-c562re
-. .\activate_zephyr_env.ps1
+. .\activate_venv.bat
 ```
 
 ### west update fails with SSL or proxy errors
@@ -758,7 +758,7 @@ cmake --version   # Should now print the newer version
 | Nucleo C562RE User Manual | https://www.st.com/resource/en/user_manual/um3615-stm32c5.pdf |
 | STM32CubeProgrammer | https://www.st.com/en/development-tools/stm32cubeprog.html |
 | Zephyr SDK Releases | https://github.com/zephyrproject-rtos/sdk-ng/releases |
-| build_tools Repository | https://github.com/<windows_user>hTabaraddi/build_tools |
+| build_tools Repository | https://github.com/girishTabaraddi/build_tools |
 | iomico Zephyr Course (upstream) | https://github.com/iomico-public/zephyr-course |
 
 ---
