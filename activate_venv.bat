@@ -1,19 +1,28 @@
 @echo off
+setlocal EnableExtensions
 
-:: 1. Set REPO_ROOT (if not already defined externally)
+:: 1. Set REPO_ROOT to the directory containing this script (without trailing backslash)
 if not defined REPO_ROOT (
-    set "REPO_ROOT=%~dp0"
-    if "%REPO_ROOT:~-1%"=="\" set "REPO_ROOT=%REPO_ROOT:~0,-1%"
+    for %%I in ("%~dp0.") do set "REPO_ROOT=%%~fI"
 )
 
-echo %REPO_ROOT%\tools\build_tools\%
+echo ===================================================
+echo Repo Root   : %REPO_ROOT%
+echo Build Tools : %REPO_ROOT%\tools\build_tools
+echo ===================================================
 
 :: 2. Prepend local build tools (MinGW, CMake, Ninja, etc.) to PATH
 set "PATH=%REPO_ROOT%\tools\build_tools\MinGW\bin;%REPO_ROOT%\tools\build_tools\CMake\bin;%REPO_ROOT%\tools\build_tools\ninja-win;%PATH%"
 
-:: Activate the virtual environment
-call %REPO_ROOT%\tools\build_tools\Python312\.venv\Scripts\activate.bat
+:: 3. Activate the virtual environment
+set "VENV_ACTIVATE=%REPO_ROOT%\tools\build_tools\Python312\.venv\Scripts\activate.bat"
 
-:: Run your work or keep the prompt open
+if exist "%VENV_ACTIVATE%" (
+    call "%VENV_ACTIVATE%"
+) else (
+    echo [ERROR] Virtual environment not found at:
+    echo "%VENV_ACTIVATE%"
+)
+
+:: 4. Keep the command prompt open
 cmd /k
-
