@@ -1,0 +1,103 @@
+# =======================================================================================
+# KCONFIG CRASH COURSE (Zephyr RTOS)
+# Official Docs: https://docs.zephyrproject.org/latest/build/kconfig/index.html
+# Linux Kconfig Docs: https://www.kernel.org/doc/html/latest/kbuild/kconfig-language.html
+# =======================================================================================
+
+# 'menuconfig' defines a configuration symbol (just like 'config') but it ALSO 
+# creates a collapsible folder in the UI (guiconfig/menuconfig). 
+# If the user disables this (sets to 'n'), everything inside the menu is hidden.
+menuconfig LED_SUBSYSTEM
+    # 'bool' defines the data type (y/n). 
+    # The string "LED Subsystem" is the prompt displayed to the user in the UI.
+    bool "LED Subsystem"
+    # 'default' sets the initial value. 'y' means it is enabled by default.
+    default y
+
+# 'if' blocks apply a dependency to everything inside them. 
+# The following options will only be evaluated and visible if LED_SUBSYSTEM is 'y'.
+if LED_SUBSYSTEM
+
+    # 'choice' creates a radio-button style list. 
+    # The user can only select exactly ONE of the options inside this block.
+    choice
+        # 'prompt' is the title of this choice block in the UI.
+        prompt "LED Blink Sleep Time"
+        # The default selection for this choice block.
+        default BLINK_SLEEP_1000MS
+
+    # 'config' defines a standard configuration symbol. 
+    # In C code, this will become CONFIG_BLINK_SLEEP_250MS.
+    config BLINK_SLEEP_250MS
+        bool "Fast (250 ms)"
+        
+    config BLINK_SLEEP_1000MS
+        bool "Medium (1000 ms)"
+        
+    config BLINK_SLEEP_2000MS
+        bool "Slow (2000 ms)"
+    endchoice # Ends the radio-button block
+
+    # This config has no prompt string after 'int', meaning it is INVISIBLE in the UI.
+    # It acts as a background variable that automatically calculates a value 
+    # based on the user's selection in the 'choice' block above.
+    config BLINK_SLEEP_TIME_MS
+        # 'int' sets the data type to an integer.
+        int
+        # It assigns a specific integer value based on which boolean is true.
+        default 250 if BLINK_SLEEP_250MS
+        default 1000 if BLINK_SLEEP_1000MS
+        default 2000 if BLINK_SLEEP_2000MS
+        # Fallback default if none of the above are true.
+        default 0
+    
+    # Another collapsible menu, nested inside the LED_SUBSYSTEM.
+    menuconfig ADVANCED_LED_SETTINGS
+        bool "Advanced LED Settings"
+        default n # Disabled by default
+
+    # Everything below depends on the user enabling ADVANCED_LED_SETTINGS.
+    if ADVANCED_LED_SETTINGS
+        
+        config LED_Brightness
+            int "LED Brightness (0-100)"
+            default 100
+            # 'range' restricts the user input for an 'int' or 'hex' type.
+            # If the user tries to enter 101, the config system will reject it.
+            range 0 100
+        
+        config LED_Fade_Duration
+            int "LED Fade Duration (ms)"
+            default 500
+            range 0 5000
+        
+        config Expert_Settings
+            bool "Expert Settings"
+            default n
+        
+        # 'menu' creates a purely visual folder in the UI. 
+        # Unlike 'menuconfig', a 'menu' does NOT have its own y/n state or CONFIG_ macro.
+        menu "Expert Settings"
+            # 'visible if' completely hides this folder from the UI unless 
+            # the 'Expert_Settings' boolean (defined above) is set to 'y'.
+            visible if Expert_Settings
+
+            config ENABLE_LED_DEBUGGING
+                bool "Enable LED Debugging"
+                default n
+            
+            config CUSTOM_LED_PATTERN
+                # 'string' defines a text input data type. 
+                # In C code, CONFIG_CUSTOM_LED_PATTERN will equal "10101010".
+                string "Custom LED Pattern"
+                default "10101010"
+                
+        endmenu # Ends the visual folder
+    endif # Ends the ADVANCED_LED_SETTINGS block
+
+endif # Ends the LED_SUBSYSTEM block
+
+# 'source' imports another Kconfig file at this exact location, acting like an #include in C.
+# This specific line imports the main Zephyr configuration tree, making all standard
+# Zephyr OS configurations (like kernel, drivers, etc.) available in the project.
+source "Kconfig.zephyr"
