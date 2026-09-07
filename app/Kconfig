@@ -12,7 +12,7 @@ menuconfig LED_SUBSYSTEM
     # The string "LED Subsystem" is the prompt displayed to the user in the UI.
     bool "LED Subsystem"
     # 'default' sets the initial value. 'y' means it is enabled by default.
-    default y
+    default n
 
 # 'if' blocks apply a dependency to everything inside them. 
 # The following options will only be evaluated and visible if LED_SUBSYSTEM is 'y'.
@@ -96,6 +96,17 @@ if LED_SUBSYSTEM
     endif # Ends the ADVANCED_LED_SETTINGS block
 
 endif # Ends the LED_SUBSYSTEM block
+
+menuconfig APP_HEARTBEAT
+    bool "Application Heartbeat"
+    default y
+
+if APP_HEARTBEAT
+    config APP_HEARTBEAT_PERIOD_MS
+        int "Heartbeat Interval (ms)"
+        default 500
+        range 100 2000
+endif # Ends the APP_HEARTBEAT block
 
 # 'source' imports another Kconfig file at this exact location, acting like an #include in C.
 # This specific line imports the main Zephyr configuration tree, making all standard
