@@ -1,4 +1,0 @@
-config BOARD_MY_BOARD
-    bool "My Board"
-    default y
-    select SOC_STM32C562XX
