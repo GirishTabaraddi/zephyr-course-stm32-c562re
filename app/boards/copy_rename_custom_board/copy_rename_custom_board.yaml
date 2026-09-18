@@ -1,4 +1,4 @@
-identifier: test_board
+identifier: copy_rename_custom_board
 name: ST Nucleo C562RE
 type: mcu
 arch: arm
