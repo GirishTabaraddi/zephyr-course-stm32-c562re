@@ -12,7 +12,7 @@
 #include "st_morpho_connector.dtsi"
 
 / {
-	model = "STMicroelectronics STM32C562RE-NUCLEO board";
+	model = "Copy Rename Custom Board";
 	compatible = "st,stm32c562re-nucleo";
 
 	#address-cells = <1>;

@@ -1,6 +1,0 @@
-board:
-  name: test_board
-  full_name: Test Board
-  vendor: iomico
-  socs:
-    - name: stm32c562xx

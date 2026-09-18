@@ -1,7 +1,7 @@
 # Copyright (c) 2026 STMicroelectronics
 # SPDX-License-Identifier: Apache-2.0
 
-config BOARD_OUR_BOARD
-	bool "Test Board"
+config BOARD_COPY_RENAME_CUSTOM_BOARD
+	bool "Copy Rename Custom Board"
 	default y
 	select SOC_STM32C562XX
