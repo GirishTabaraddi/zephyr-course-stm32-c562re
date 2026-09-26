@@ -8,6 +8,20 @@
 		compatible = "our,driver";
 		status = "okay";
 	};
+
+	l6task1_on_board_led: led_sensor{
+		compatible = "l6task1,on-board-led";
+		status = "okay";
+		gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+	};
 };
+
+&leds{
+	green_led_1: led_1 {
+		gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+		label = "LD1";
+	};
+};
+
 
 

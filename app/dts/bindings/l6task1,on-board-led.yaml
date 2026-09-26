@@ -1,0 +1,14 @@
+description: Simple LED driver for the STM32 C562RE board
+
+compatible: "l6task1,on-board-led"
+
+properties:
+  gpios:
+    type: phandle-array
+    required: true
+    description: GPIO pin used to control the on-board LED
+
+  led-color:
+    type: string
+    description: User LED Yellow
+
