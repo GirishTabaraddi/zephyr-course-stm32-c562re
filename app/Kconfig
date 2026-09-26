@@ -114,3 +114,4 @@ endif # Ends the APP_HEARTBEAT block
 source "Kconfig.zephyr"
 
 rsource "drivers/our_driver/Kconfig"
+rsource "drivers/l6task1_led_driver/Kconfig"

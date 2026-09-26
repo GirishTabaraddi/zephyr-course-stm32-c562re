@@ -1,0 +1,9 @@
+menu "L6TASK1 ON BOARD LED Driver"
+
+config L6TASK1_ON_BOARD_LED_DRIVER
+    bool "Enable L6TASK1 ON BOARD LED Driver"
+    default y
+    help
+      Enable the L6TASK1 ON BOARD LED driver for controlling the on-board LED.
+
+endmenu

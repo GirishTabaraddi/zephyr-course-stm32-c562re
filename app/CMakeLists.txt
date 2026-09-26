@@ -7,3 +7,4 @@ project(my_zephyr_app)
 target_sources(app PRIVATE src/main.cpp)
 
 add_subdirectory(drivers/our_driver)
+add_subdirectory(drivers/l6task1_led_driver)
