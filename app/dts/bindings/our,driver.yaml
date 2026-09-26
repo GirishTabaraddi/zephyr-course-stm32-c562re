@@ -1,0 +1,5 @@
+description: Custom Demo Sensor Driver
+
+compatible: "our,driver"
+
+include: base.yaml
