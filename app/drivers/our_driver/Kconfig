@@ -1,0 +1,5 @@
+config OUR_DRIVER
+    bool "Our Driver"
+    default y
+    help
+      Enable this option to include our custom driver in the build.

@@ -112,3 +112,5 @@ endif # Ends the APP_HEARTBEAT block
 # This specific line imports the main Zephyr configuration tree, making all standard
 # Zephyr OS configurations (like kernel, drivers, etc.) available in the project.
 source "Kconfig.zephyr"
+
+rsource "drivers/our_driver/Kconfig"
