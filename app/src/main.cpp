@@ -3,6 +3,8 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/sensor.h>
 
+#include "custom_api_led_sensor.h"
+
 // // #define SLEEP_TIME_MS 500
 
 // /* The devicetree node identifier for the "led0" alias. */
@@ -62,7 +64,9 @@ int main(void)
     while(1)
     {
         sensor_sample_fetch(led_sensor);
-        k_msleep(10000);
+        k_msleep(1000);
+
+        on_board_led_sensor_set_param(led_sensor, k_uptime_get_32());
 
         sensor_channel_get(led_sensor, SENSOR_CHAN_ALL, &val);
         k_msleep(1000);
