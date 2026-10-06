@@ -7,3 +7,18 @@ config L6TASK1_ON_BOARD_LED_DRIVER
       Enable the L6TASK1 ON BOARD LED driver for controlling the on-board LED.
 
 endmenu
+
+if SHELL
+
+choice
+    prompt "Select LED Sensor Shell Version"
+    default L7_TASK2_SHELL
+
+    config L7_TASK1_SHELL
+        bool "Task 1 Shell (Basic info, fetch, read)"
+        
+    config L7_TASK2_SHELL
+        bool "Task 2 Shell (Adds 'set' command with validation)"
+endchoice
+
+endif # CONFIG_SHELL
