@@ -3,7 +3,7 @@
 
 static int my_custom_board_init(void)
 {
-    printk("Custom board initialization\n");
+    printk("Board Initialized\n");
     return 0;
 }
 
