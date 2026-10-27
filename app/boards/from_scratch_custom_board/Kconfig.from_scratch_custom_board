@@ -1,0 +1,4 @@
+config BOARD_FROM_SCRATCH_CUSTOM_BOARD
+    bool "From Scratch Custom Board"
+    default y
+    select SOC_STM32C562XX
