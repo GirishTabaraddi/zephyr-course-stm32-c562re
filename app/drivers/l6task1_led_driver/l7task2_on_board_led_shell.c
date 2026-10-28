@@ -89,7 +89,12 @@ static int cmd_set(const struct shell *sh, size_t argc, char **argv)
         return -EINVAL;
     }
 
-    /* Validation 2: Ensure the argument falls within a specific range (e.g., 0 to 10000) */
+    /* Validation 2: Ensure the argument falls within a specific range (e.g., 10 to 10000) */
+    if (new_param < 10) {
+        shell_error(sh, "Error: Value %lu is too low. Must be >= 10.", new_param);
+        return -EINVAL;
+    }
+    
     if (new_param > 10000) {
         shell_error(sh, "Error: Value %lu is out of range. Must be <= 10000.", new_param);
         return -EINVAL;
